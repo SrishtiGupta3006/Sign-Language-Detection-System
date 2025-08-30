@@ -1,241 +1,150 @@
-[README.md](https://github.com/user-attachments/files/22057010/README.md)**Sign-Language-To-Text-and-Speech-Conversion**
-
-**ABSTRACT:** 
-
- Sign language is one of the oldest and most natural form of language for communication, hence we have come up with a real time method using neural networks for finger spelling based American sign language. Automatic human gesture recognition from camera images is an interesting topic for developing vision. We propose a convolution neural network (CNN) method to recognize hand gestures of human actions from an image captured by camera. The purpose is to recognize hand gestures of human task activities from a camera image. The position of hand and orientation are applied to obtain the training and testing data for the CNN. The hand is first passed through a filter and after the filter is applied where the hand is passed through a classifier which predicts the class of the hand gestures. Then the calibrated images are used to train CNN. 
+# Sign-Language-To-Text-and-Speech-Conversion ✋ 🗣️
 
 
-
-**Introduction:**
-
- American sign language is a predominant sign language Since the only disability D&M people have been communication related and they cannot use spoken languages hence the only way for them to communicate is through sign language. Communication is the process of exchange of thoughts and messages in various ways such as speech, signals, behavior and visuals. Deaf and dumb(D&M) people make use of their hands to express different gestures to express their ideas with other people. Gestures are the nonverbally exchanged messages and these gestures are understood with vision. This nonverbal communication of deaf and dumb people is called sign language. 
-
-In our project we basically focus on producing a model which can recognise Fingerspelling based hand gestures in order to form a complete word by combining each gesture. The gestures we aim to train are as given in the image below. 
+This project presents a real-time method for recognizing American Sign Language (ASL) finger spelling using Convolutional Neural Networks (CNNs). Hand gestures captured from a camera are processed, classified, and used to train the CNN for accurate recognition of hand positions and orientations.
 
 
-![Spanish_SL](https://user-images.githubusercontent.com/99630855/201489493-585ffe5c-f460-402a-b558-0d03370b4f92.jpg)
+## 📖 Introduction
 
-**Requirements:**
+American Sign Language (ASL) is the primary means of communication for people with hearing and speech impairments. Since they cannot rely on spoken language, they use hand gestures to express ideas and exchange messages. These visual, nonverbal gestures form the basis of sign language.
 
-More than 70 million deaf people around the world use sign languages to communicate. Sign language allows them to learn, work, access services, and be included in the communities.  
+In our project, we focus on producing a model which can recognize Fingerspelling based hand gestures in order to form a complete word by combining each gesture. The gestures we aim to train are as given in the image below. 
 
-It is hard to make everybody learn the use of sign language with the goal of ensuring that people with disabilities can enjoy their rights on an equal basis with others. 
+<p align="left">
+     <img src="https://user-images.githubusercontent.com/99630855/201489493-585ffe5c-f460-402a-b558-0d03370b4f92.jpg" alt="Image 1" width="500" height="400"/>
+</p>
 
-So, the aim is to develop a user-friendly human computer interface (HCI) where the computer understands the American sign language This Project will help the dumb and deaf people by making their life easy. 
+More than 70 million deaf people around the world use sign languages to communicate. Sign language allows them to learn, work, access services, and be included in the communities. It is hard to make everybody learn the use of sign language with the goal of ensuring that people with disabilities can enjoy their rights on an equal basis with others so, the aim is to develop a user-friendly human computer interface (HCI) where the computer understands the American sign language. This Project will help the dumb and mute people by making their life easy. 
 
+### 🎯 Objective
+- Create a computer software model using CNN to recognize hand gestures of American Sign Language (ASL).  
+- Convert recognized gestures into both text and audio output using a text-to-speech system.
 
-**Objective:**
-To create a computer software and train a model using CNN which takes an image of hand gesture of American Sign Language and shows the output of the particular sign language in text format converts it into audio format. 
+### 🔭 Scope
+This system helps bridge communication between deaf/mute individuals and those unfamiliar with sign language by recognizing gestures and providing output in both text and speech.
 
+## 📦 Modules
 
-**Scope:**
-This System will be Beneficial for Both Dumb/Deaf People and the People Who do not understands the Sign Language. They just need to do that with sign Language gestures and this system will identify what he/she is trying to say after identification it gives the output in the form of Text as well as Speech format. 
-
-**Modules:**
-
-**Data Acquisition :**
-
+## A. Data Acquisition 📷
 The different approaches to acquire data about the hand gesture can be done in the following ways: 
 
-It uses electromechanical devices to provide exact hand configuration, and position. Different glove-based approaches can be used to extract information. But it is expensive and not user friendly. 
+**1. Glove-based** methods use electromechanical devices to capture hand configuration and position, but they are costly and less user-friendly.
 
-In vision-based methods, the computer webcam is the input device for observing the information of hands and/or fingers. The Vision Based methods require only a camera, thus realizing a natural interaction between humans and computers without the use of any extra devices, thereby reducing costs.  The main challenge of vision-based hand detection ranges from coping with the large variability of the human hand’s appearance due to a huge number of hand movements, to different skin-color possibilities as well as to the variations in viewpoints, scales, and speed of the camera capturing the scene. 
+**2. Vision-based** methods use a simple camera to detect hands and fingers, offering a natural and low-cost solution.
 
- 
-![Screenshot (224)](https://user-images.githubusercontent.com/99630855/201489523-0804652e-1a38-4242-ad69-8bfafb25f55a.png)
+The main challenge of vision-based hand detection ranges from coping with the large variability of the human hand’s appearance due to a huge number of hand movements, to different skin-color possibilities as well as to the variations in viewpoints, scales, and speed of the camera capturing the scene.
 
- 
+<p align="left">
+     <img src="https://github.com/user-attachments/assets/bbb6bbb6-3b90-4def-b3d1-289d347dde08" alt="Image 1" width="500" height="500"/>
+</p>
 
-**Data pre-processing and Feature extraction:**
+## B. Data pre-processing and Feature extraction 🔎
+- Hand detection using MediaPipe.  
+- ROI cropped, converted to grayscale, blurred with Gaussian filters, and converted to binary using thresholding.  
+- Collected ASL letters (A–Z) from different angles.  
 
-In this approach for hand detection, firstly we detect hand from image that is acquired by webcam and for detecting a hand we used media pipe library which is used for image processing. So, after finding the hand from image we get the region of interest (Roi) then we cropped that image and convert the image to gray image using OpenCV library after we applied the gaussian blur .The filter can be easily applied using open computer vision library also known as OpenCV. Then we converted the gray image to binary image using threshold and Adaptive threshold methods. 
+**Limitation:** Requires clean background and proper lighting.  
 
-We have collected images of different signs of different angles  for sign letter A to Z. 
+**Improvement:** MediaPipe landmarks drawn on plain white images for robustness against background noise and lighting variations.
 
- ![fdfScreenshot (227)](https://user-images.githubusercontent.com/99630855/201489564-04b0416d-f976-4946-80d3-01bab6897ce3.png) 
+**Mediapipe Landmark System:** 
+<p align="left">
+     <img src="https://user-images.githubusercontent.com/99630855/201489741-3649959e-df4d-4c32-898a-8f994be92ca2.png" alt="Image 1" width="500" height="500"/>
+</p>
 
-- in this method there are many loop holes like your hand must be ahead of clean soft background and that is in proper lightning condition then only this method will give good accurate results but in real world we dont get good background everywhere and we don’t get good lightning conditions too. 
-
-So to overcome this situation we try different approaches then we reached at one interesting solution in which firstly we detect hand from frame using mediapipe and get the hand landmarks of hand present in that image then we draw and connect those landmarks in simple white image  
-
-Mediapipe Landmark System: 
-
-![2410344](https://user-images.githubusercontent.com/99630855/201489741-3649959e-df4d-4c32-898a-8f994be92ca2.png)
-
-![a12](https://user-images.githubusercontent.com/99630855/201490095-96402d48-b289-4ff3-9738-ed99ffcffca6.jpg)
-
-![a23](https://user-images.githubusercontent.com/99630855/201490105-87b17583-45c5-4e3b-82d1-0c9a6f98fc55.jpg)
-
-![13](https://github.com/user-attachments/assets/859ca7a9-49e3-4802-85dc-25e779408390)
-
-![b11](https://user-images.githubusercontent.com/99630855/201490119-55ff1b2d-1826-4bc6-994e-8c8c528c8c35.jpg)
-
-![0](https://github.com/user-attachments/assets/2cba0c02-9579-4e73-a021-b7653e92e2f1)
-
+<p align="left">
+  <img src="https://user-images.githubusercontent.com/99630855/201490095-96402d48-b289-4ff3-9738-ed99ffcffca6.jpg" alt="Image 2" width="250"/>
+  <img src="https://user-images.githubusercontent.com/99630855/201490105-87b17583-45c5-4e3b-82d1-0c9a6f98fc55.jpg" alt="Image 3" width="250"/>
+  <img src="https://github.com/user-attachments/assets/859ca7a9-49e3-4802-85dc-25e779408390" alt="Image 4" width="250"/>
+</p>
 
 Now we get this landmark points and draw it in plain white background using opencv library 
 
--By doing this we tackle the situation of background and lightning conditions because the mediapipe labrary will give us landmark points in any background and mostly in any lightning conditions. 
+-By doing this we tackle the situation of background and lighting conditions because the mediapipe library will give us landmark points in any background and mostly in any lightning conditions. We have collected 180 skeleton images of Alphabets from A to Z 
 
+## C. Gesture Classification : ✨
 
+**C.1 Convolutional Layer:** In convolution layer I have taken a small window size [typically of length 5*5] that extends to the depth of the input matrix. 
+The layer consists of learnable filters of window size. During every iteration we slid the window by stride size [typically 1], and compute the dot product of filter entries and input values at a given position. 
 
+As I continue this process we'll create a 2-Dimensional activation matrix that gives the response of that matrix at every spatial position, i.e, the network will learn filters that activate when they see some type of visual feature such as an edge of some orientation or a blotch of some colour.
 
--we have collected 180 skeleton images of Alphabets from A to Z 
+<p align="left">
+     <img src="https://user-images.githubusercontent.com/99630855/201490154-1416d8ad-c7df-42a2-a296-5d56bad1d5c5.png" alt="Image 1" width="500" height="500"/>
+</p>
 
-**Gesture Classification :**
-
-**Convolutional Neural Network (CNN)**
-
-CNN is a class of neural networks that are highly useful in solving computer vision problems. They found inspiration from the actual perception of vision that takes place in the visual cortex of our brain. They make use of a filter/kernel to scan through the entire pixel values of the image and make computations by setting appropriate weights to enable detection of a specific feature. CNN is equipped with layers like convolution layer, max pooling layer, flatten layer, dense layer, dropout layer and a fully connected neural network layer. These layers together make a very powerful tool that can identify features in an image. The starting layers detect low level features that gradually begin to detect more complex higher-level features 
-
- 
-
-Unlike regular Neural Networks, in the layers of CNN, the neurons are arranged in 3 dimensions: width, height, depth. 
-
-The neurons in a layer will only be connected to a small region of the layer (window size) before it, instead of all of the neurons in a fully-connected manner. 
-
-Moreover, the final output layer would have dimensions(number of classes), because by the end of the CNN architecture we will reduce the full image into a single vector of class scores. 
-
-CNN 
-
-**Convolutional Layer:**
-
-In convolution layer I have taken a small window size [typically of length 5*5] that extends to the depth of the input matrix. 
-
-The layer consists of learnable filters of window size. During every iteration I slid the window by stride size [typically 1], and compute the dot product of filter entries and input values at a given position. 
-
-As I continue this process well create a 2-Dimensional activation matrix that gives the response of that matrix at every spatial position. 
-
-That is, the network will learn filters that activate when they see some type of visual feature such as an edge of some orientation or a blotch of some colour. 
-![cnn](https://user-images.githubusercontent.com/99630855/201490154-1416d8ad-c7df-42a2-a296-5d56bad1d5c5.png)
-
-**Pooling Layer:**
-
-We use pooling layer to decrease the size of activation matrix and ultimately reduce the learnable parameters. 
-
+**C.2 Pooling Layer:** We use pooling layer to decrease the size of activation matrix and ultimately reduce the learnable parameters. 
 There are two types of pooling: 
 
-   **a. Max Pooling:**
+   **C.2.1 Max Pooling:** In max pooling we take a window size [for example window of size 2*2], and only taken the maximum of 4 values. 
+    Well slide this window and continue this process, so well finally get an activation matrix half of its original Size. 
 
-In max pooling we take a window size [for example window of size 2*2], and only taken the maximum of 4 values. 
+  **C.2.2 Average Pooling:**  In average pooling we take average of all Values in a window.
+     <p align="left">
+        <img src="https://user-images.githubusercontent.com/99630855/201490158-22a8a043-c2fe-4082-8fb5-a6c173061b58.jpg" alt="Image 1" width="500" height="500"/>
+    </p>
 
-Well lid this window and continue this process, so well finally get an activation matrix half of its original Size. 
+## D. Fully Connected Layer: 🔗
+In convolution layer neurons are connected only to a local region, while in a fully connected region, we connect the all the inputs to neurons.
 
-  **b. Average Pooling:** 
+   <p align="left">
+        <img src="https://user-images.githubusercontent.com/99630855/201490169-00b17306-e355-4d2e-88e5-3fbd4c7b3f17.png" alt="Image 1" width="250" height="250"/>
+    </p>
 
-In average pooling we take average of all Values in a window. 
-
-pooling 
-
-![pooling](https://user-images.githubusercontent.com/99630855/201490158-22a8a043-c2fe-4082-8fb5-a6c173061b58.jpg)
-
-**Fully Connected Layer:**
-
-In convolution layer neurons are connected only to a local region, while in a fully connected region, well connect the all the inputs to neurons. 
-
-Fully Connected Layer 
-
-![fullyConnectedLayer](https://user-images.githubusercontent.com/99630855/201490169-00b17306-e355-4d2e-88e5-3fbd4c7b3f17.png)
- 
-
-The preprocessed 180 images/alphabet will feed the keras CNN model.  
-
-Because we got bad accuracy in 26 different classes thus, We divided whole 26 different alphabets into 8 classes in which every class contains similar alphabets: 
+-The preprocessed 180 images/alphabet will feed the keras CNN model.  
+-Because we got bad accuracy in 26 different classes thus, we divided whole 26 different alphabets into 8 classes in which every class contains similar alphabets: 
 [y,j] 
-
 [c,o] 
-
 [g,h] 
-
 [b,d,f,I,u,v,k,r,w] 
-
 [p,q,z] 
-
 [a,e,m,n,s,t] 
 
-All the gesture labels will be assigned with a  
+-All the gesture labels will be assigned with a probability. The label with the highest probability will treated to be the predicted label, so when model will classify [aemnst] in one single class using mathematical operation on hand landmarks we will classify further into single alphabet a or e or m or n or s or t. 
 
-probability. The label with the highest probability will treated to be the predicted label. 
+-Finally, we got **97%** Accuracy (with and without clean background and proper lightning conditions) through our method. And if the background is clear and there is good lightning condition then we got even **99%** accurate results!
 
-So when model will classify [aemnst] in one single class using mathematical operation on hand landmarks we will classify further into single alphabet a or e or m or n or s or t. 
+**Text To Speech Translation:** The model translates known gestures into words. we have used pyttsx3 library to convert the recognized words into the appropriate speech. The text-to-speech output is a simple workaround, but it's a useful feature because it simulates a real-life dialogue. 
 
--Finally, we got **97%** Accuracy (with and without clean background and proper lightning conditions) through our method. And if the background is clear and there is good lightning condition then we got even **99%** accurate results 
+## System Flowchart
 
-**Text To Speech Translation:**
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/99630855/201490238-224f65aa-071f-473a-8c23-a9d60e0a47d8.png" alt="Image 1" width="400" height="500"/>
+ </p>
 
-The model translates known gestures into words. we have used pyttsx3 library to convert the recognized words into the appropriate speech. The text-to-speech output is a simple workaround, but it's a useful feature because it simulates a real-life dialogue. 
-
-**Project Requirements :**
-
-**Hardware Requirement:**
-
-Webcam 
-
-**Software Requirement:**
-
-Operating System: Windows 8 and Above 
-
-IDE: PyCharm 
-
-Programming Language: Python 3.9 5 
-
-Python libraries: OpenCV, NumPy, Keras,mediapipe,Tensorflow 
-
-
-**System Diagrams:**
-
-
-**System Flowchart:**
-
-![system flowchart](https://user-images.githubusercontent.com/99630855/201490238-224f65aa-071f-473a-8c23-a9d60e0a47d8.png)
-
-
-**Use-case diagram:**
-
-![Untitled Diagram drawio](https://user-images.githubusercontent.com/99630855/201490218-85f4c194-0496-4dfb-b920-e486256bd6b7.png)
- 
-**DFD diagram:**
-
-![Flowcharts (2)](https://user-images.githubusercontent.com/99630855/201490221-f543fa6d-75ba-4db0-bc35-ee8c06e25018.png)
-![Flowcharts (1)](https://user-images.githubusercontent.com/99630855/201490226-966bcc44-8149-433d-ab3b-b0a23deb1c91.png)
- 
-
-**Sequence diagram:**
-
-![sequence2](https://user-images.githubusercontent.com/99630855/201490230-b903c365-7a4c-4972-8268-5687060b9cd0.png)
-
-### 🛠️ Requirements
-- Python 3.9
-- opencv-python==4.7.0.72
-- mediapipe==0.10.21
-- tensorflow==2.10.0
-- protobuf==3.20.3
-- pyttsx3
-- cvzone
+## 🛠 Requirements
+1. Python 3.9
+2. opencv-python==4.7.0.72
+3. mediapipe==0.10.21
+4. tensorflow==2.10.0
+5. protobuf==3.20.3
+6. pyttsx3
+7. cvzone
+8. Hardware : Webcam
+9. Operating System: Windows 8 and Above 
   
 ## ⚙️ Setup Instructions
 
-### 1. Clone or Download the Project
+**1. Clone or Download the Project**
 Place the project folder on your system (e.g., Desktop).
 
-### 2. Create a Virtual Environment (only once)
+**2. Create a Virtual Environment (only once)**
 ```bash
 python -m venv slenv39
 ```
 
-### 3. Activate the Environment (every time before running)
-- **Windows (PowerShell):**
+**3. Activate the Environment** (every time before running)
+- Windows (PowerShell):
 ```bash
 .\slenv39\Scriptsctivate
 ```
-- **Windows (Command Prompt):**
+- Windows (Command Prompt):
 ```bash
 slenv39\Scripts\activate
 ```
-
 You should now see `(slenv39)` at the start of your terminal.
 
-### 4. Install Dependencies (only once)
+**4. Install Dependencies**(only once)
 ```bash
 pip install opencv-python==4.7.0.72 mediapipe==0.10.21 tensorflow==2.10.0 protobuf==3.19.6 pyttsx3 cvzone
 ```
@@ -245,38 +154,33 @@ If `requirements.txt` is missing, install manually:
 pip install opencv-python mediapipe tensorflow pyttsx3 cvzone
 ```
 
----
+## 🚀 Running the Project
 
-## ▶️ Running the Project
-
-### Option 1: Run from PowerShell/Command Prompt
+**Option 1: Run from PowerShell/Command Prompt**
 ```bash
 python final_pred.py
 ```
 
-### Option 2: Run from VS Code
+**Option 2: Run from VS Code**
 1. Open VS Code in the project folder.  
 2. Select the **Python Interpreter** → `slenv39`.  
    *(Bottom-right corner → click → choose `.\slenv39\Scripts\python.exe`)*  
 3. Open `final_pred.py`.  
-4. Press ▶️ **Run** (or `Ctrl + F5`).
+4. Press **Run** (or `Ctrl + F5`).
 
----
 
-## ✅ Common Fixes
+## 🔧 Common Fixes
 
-- If you see `AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'` → reinstall protobuf:
+1. If you see `AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'` → reinstall protobuf:
 ```bash
 pip install --upgrade protobuf==3.20.3
 ```
 
-- If nothing happens in VS Code but works in PowerShell → check interpreter is set to `slenv39`.
+2. If nothing happens in VS Code but works in PowerShell → check interpreter is set to `slenv39`.
+3. Always **activate the environment before running**.
 
-- Always **activate the environment before running**.
 
----
-
-## Done!
+## ✔️ Done!
 Now when you run `final_pred.py`, the camera will open, detect hand signs, and speak out the prediction.
 
  
