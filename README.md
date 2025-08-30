@@ -66,24 +66,18 @@ Mediapipe Landmark System:
 
 ![a23](https://user-images.githubusercontent.com/99630855/201490105-87b17583-45c5-4e3b-82d1-0c9a6f98fc55.jpg)
 
-![7](https://user-images.githubusercontent.com/99630855/201490124-dc41d7ad-313f-47b7-b50c-0f9db3155e0d.jpg)
+![13](https://github.com/user-attachments/assets/859ca7a9-49e3-4802-85dc-25e779408390)
 
 ![b11](https://user-images.githubusercontent.com/99630855/201490119-55ff1b2d-1826-4bc6-994e-8c8c528c8c35.jpg)
 
-![b16](https://user-images.githubusercontent.com/99630855/201490122-46d87005-ccb6-46ac-9dcf-185a569d6958.jpg)
+![0](https://github.com/user-attachments/assets/2cba0c02-9579-4e73-a021-b7653e92e2f1)
 
-![127](https://user-images.githubusercontent.com/99630855/201490130-b0aae39b-a623-4cf8-b41d-0611c02637ed.jpg)
- 
 
 Now we get this landmark points and draw it in plain white background using opencv library 
 
 -By doing this we tackle the situation of background and lightning conditions because the mediapipe labrary will give us landmark points in any background and mostly in any lightning conditions. 
 
 
-![2022-10-31](https://user-images.githubusercontent.com/99630855/201489669-1b262755-23f8-4e02-91ba-393aa6482620.png)
-![2022-10-31 (1)](https://user-images.githubusercontent.com/99630855/201489673-08a8dad8-30a4-426a-8f62-02190416191d.png)
-
- ![hhee2022-10-31 (2)](https://user-images.githubusercontent.com/99630855/201496302-f67b360a-1ef5-4486-8ff7-cc56cee30b97.png)
 
 
 -we have collected 180 skeleton images of Alphabets from A to Z 
@@ -167,11 +161,6 @@ So when model will classify [aemnst] in one single class using mathematical oper
 
 -Finally, we got **97%** Accuracy (with and without clean background and proper lightning conditions) through our method. And if the background is clear and there is good lightning condition then we got even **99%** accurate results 
 
-![2022-11-01 (2)](https://user-images.githubusercontent.com/99630855/201489689-3adeacf0-ca19-471d-8942-cf7effc6296a.png)
-![2022-11-01 (3)](https://user-images.githubusercontent.com/99630855/201489695-d14822c4-3a48-41c3-9cde-8fac4d835f65.png)
-![2022-11-01 (4)](https://user-images.githubusercontent.com/99630855/201489697-168c8ca3-e4b3-4fc5-9e3a-97b239971c27.png)
-![2022-11-01 (5)](https://user-images.githubusercontent.com/99630855/201489700-78b38657-16c0-45ac-88ec-ef06ada7870e.png)
-
 **Text To Speech Translation:**
 
 The model translates known gestures into words. we have used pyttsx3 library to convert the recognized words into the appropriate speech. The text-to-speech output is a simple workaround, but it's a useful feature because it simulates a real-life dialogue. 
@@ -214,6 +203,81 @@ Python libraries: OpenCV, NumPy, Keras,mediapipe,Tensorflow
 **Sequence diagram:**
 
 ![sequence2](https://user-images.githubusercontent.com/99630855/201490230-b903c365-7a4c-4972-8268-5687060b9cd0.png)
+
+### 🛠️ Requirements
+- Python 3.9
+- opencv-python==4.7.0.72
+- mediapipe==0.10.21
+- tensorflow==2.10.0
+- protobuf==3.20.3
+- pyttsx3
+- cvzone
+  
+## ⚙️ Setup Instructions
+
+### 1. Clone or Download the Project
+Place the project folder on your system (e.g., Desktop).
+
+### 2. Create a Virtual Environment (only once)
+```bash
+python -m venv slenv39
+```
+
+### 3. Activate the Environment (every time before running)
+- **Windows (PowerShell):**
+```bash
+.\slenv39\Scriptsctivate
+```
+- **Windows (Command Prompt):**
+```bash
+slenv39\Scripts\activate
+```
+
+You should now see `(slenv39)` at the start of your terminal.
+
+### 4. Install Dependencies (only once)
+```bash
+pip install opencv-python==4.7.0.72 mediapipe==0.10.21 tensorflow==2.10.0 protobuf==3.19.6 pyttsx3 cvzone
+```
+
+If `requirements.txt` is missing, install manually:
+```bash
+pip install opencv-python mediapipe tensorflow pyttsx3 cvzone
+```
+
+---
+
+## ▶️ Running the Project
+
+### Option 1: Run from PowerShell/Command Prompt
+```bash
+python final_pred.py
+```
+
+### Option 2: Run from VS Code
+1. Open VS Code in the project folder.  
+2. Select the **Python Interpreter** → `slenv39`.  
+   *(Bottom-right corner → click → choose `.\slenv39\Scripts\python.exe`)*  
+3. Open `final_pred.py`.  
+4. Press ▶️ **Run** (or `Ctrl + F5`).
+
+---
+
+## ✅ Common Fixes
+
+- If you see `AttributeError: 'MessageFactory' object has no attribute 'GetPrototype'` → reinstall protobuf:
+```bash
+pip install --upgrade protobuf==3.20.3
+```
+
+- If nothing happens in VS Code but works in PowerShell → check interpreter is set to `slenv39`.
+
+- Always **activate the environment before running**.
+
+---
+
+## Done!
+Now when you run `final_pred.py`, the camera will open, detect hand signs, and speak out the prediction.
 
  
 
